@@ -8,6 +8,7 @@ public class TakeDoseVaccinationBookingSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TakeDoseVaccinationBookingSystemApplication.class, args);
+        System.out.println("From tanda");
 	}
 
 }
