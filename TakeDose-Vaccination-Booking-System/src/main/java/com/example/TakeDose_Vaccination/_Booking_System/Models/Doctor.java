@@ -1,7 +1,11 @@
 package com.example.TakeDose_Vaccination._Booking_System.Models;
 
+import com.example.TakeDose_Vaccination._Booking_System.Enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="doctors")

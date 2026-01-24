@@ -1,5 +1,6 @@
 package com.example.TakeDose_Vaccination._Booking_System.Models;
 
+import com.example.TakeDose_Vaccination._Booking_System.Enums.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
 
