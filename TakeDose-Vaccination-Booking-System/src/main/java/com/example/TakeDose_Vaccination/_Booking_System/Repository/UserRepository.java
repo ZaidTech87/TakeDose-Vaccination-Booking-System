@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
-
+ public User findByEmailId(String emailId);
 }

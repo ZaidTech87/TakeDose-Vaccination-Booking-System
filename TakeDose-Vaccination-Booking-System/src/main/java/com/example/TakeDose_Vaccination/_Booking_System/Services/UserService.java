@@ -1,5 +1,6 @@
 package com.example.TakeDose_Vaccination._Booking_System.Services;
 
+import com.example.TakeDose_Vaccination._Booking_System.DTOs.UpdateEmailDto;
 import com.example.TakeDose_Vaccination._Booking_System.Models.Dose;
 import com.example.TakeDose_Vaccination._Booking_System.Models.User;
 import com.example.TakeDose_Vaccination._Booking_System.Repository.UserRepository;
@@ -23,6 +24,18 @@ public class UserService {
         User user = userRepository.findById(userId).get();
         Dose dose = user.getDose();
         return dose.getVaccinationDate();
+    }
+    public String updateEmail(UpdateEmailDto updateEamilDto){
+        int userId = updateEamilDto.getUserId();
+        User user = userRepository.findById(userId).get();
+        user.setEmailId(updateEamilDto.getNewEmailId());
+        userRepository.save(user);
+        return "old email id modied by new email "+updateEamilDto.getNewEmailId();
+    }
+
+    public User findByEmailId(String emailId){
+        User user = userRepository.findByEmailId(emailId);
+        return user;
     }
 
 
