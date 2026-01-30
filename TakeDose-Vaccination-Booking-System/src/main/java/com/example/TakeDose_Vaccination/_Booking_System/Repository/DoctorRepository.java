@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DoctorRepository  extends JpaRepository<Doctor,Integer> {
-   // public findByEmailId(String emailId);
+    public String findByEmailId(String emailId);
 }
