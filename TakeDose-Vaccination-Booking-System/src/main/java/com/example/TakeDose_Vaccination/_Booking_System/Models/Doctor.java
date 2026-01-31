@@ -9,10 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(name="doctors")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+//@Getter
+//@Setter
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Data
 public class Doctor {
 

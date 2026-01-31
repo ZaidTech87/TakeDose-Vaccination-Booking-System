@@ -3,6 +3,8 @@ package com.example.TakeDose_Vaccination._Booking_System.Models;
 import com.example.TakeDose_Vaccination._Booking_System.Enums.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
+
+
 public class User {
 
     @Id

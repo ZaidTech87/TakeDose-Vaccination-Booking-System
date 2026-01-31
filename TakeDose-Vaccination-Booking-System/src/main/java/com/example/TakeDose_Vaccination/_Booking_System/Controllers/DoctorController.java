@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class DoctorController {
     @Autowired
     DoctorService doctorService;
-    @GetMapping("/addDoctor")
+    @PostMapping("/addDoctor")
     public String addDoctor(@RequestBody Doctor doctor){
         try{
             String responce = doctorService.addDoctor(doctor);
