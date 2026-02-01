@@ -26,9 +26,10 @@ public class DoctorController {
 
     @PostMapping("/associateWithCenter")
     public ResponseEntity<String> associateDoctor(@RequestBody AssociateDoctorDto associateDoctorDto){
-        try{
+
+        try {
             String result = doctorService.associateDoctor(associateDoctorDto);
-            return ResponseEntity<>(result,HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
