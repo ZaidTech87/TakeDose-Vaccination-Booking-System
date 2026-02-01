@@ -1,11 +1,14 @@
 package com.example.TakeDose_Vaccination._Booking_System.Services;
 
+import com.example.TakeDose_Vaccination._Booking_System.DTOs.AssociateDoctorDto;
 import com.example.TakeDose_Vaccination._Booking_System.Exeptions.DoctorAlreadyExistExeption;
 import com.example.TakeDose_Vaccination._Booking_System.Exeptions.EmailIdEmptyExeption;
 import com.example.TakeDose_Vaccination._Booking_System.Models.Doctor;
 import com.example.TakeDose_Vaccination._Booking_System.Repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class DoctorService {
@@ -21,6 +24,12 @@ public class DoctorService {
         }
         doctorRepository.save(doctor);
         return "Doctor has baeen added";
+
+    }
+
+    public String associateDoctor(AssociateDoctorDto associateDoctorDto) throws DoctorNotFound,CenterNotFound{
+        Integer docId = associateDoctorDto.getDocId();
+        Optional<Doctor> doctor = doctorRepository.findById(docId);
 
     }
 }
