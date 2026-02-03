@@ -1,6 +1,8 @@
 package com.example.TakeDose_Vaccination._Booking_System.Services;
 
+import com.example.TakeDose_Vaccination._Booking_System.DTOs.AppointmentReqDto;
 import com.example.TakeDose_Vaccination._Booking_System.Exeptions.DoctorNotFound;
+import com.example.TakeDose_Vaccination._Booking_System.Exeptions.UserNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import java.util.Optional;
 public class AppointmentService {
     @Autowired
     AppointmentRepository appointmentRepository;
-    public String bookAppoinment(AppointmentReqDto appointmentReqDto)throws DoctorNotFound, UserNotFound{
+    public String bookAppoinment(AppointmentReqDto appointmentReqDto)throws DoctorNotFound, UserNotFound {
         Optional<>
 
     }
