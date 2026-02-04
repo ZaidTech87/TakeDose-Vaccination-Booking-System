@@ -22,7 +22,7 @@ public class AppointmentController {
         try {
             String res = appointmentService.bookAppointment(appointmentReqDto);
             return res;
-        }catch (Exeption e){
+        }catch(Exception e){
             return e.getMessage();
         }
 
