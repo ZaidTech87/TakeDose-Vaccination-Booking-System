@@ -10,6 +10,7 @@ import com.example.TakeDose_Vaccination._Booking_System.Repository.AppointmentRe
 import com.example.TakeDose_Vaccination._Booking_System.Repository.DoctorRepository;
 import com.example.TakeDose_Vaccination._Booking_System.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,31 @@ public class AppointmentService {
         appointment.setAppointmentDate(appointmentReqDto.getAppointmentDate());
         appointment.setAppointmetTime(appointmentReqDto.getAppointmentTime());
 
+         appointment.setDoctor(doctor);
+         appointment.setUser(user);
+
+         appointmentRepository.save(appointment);
+         doctor.getAppointmentList().add(appointment);
+         user.getAppointmentList().add(appointment);
+
+         doctorRepository.save(doctor);
+         userRepository.save(user);
+
+        String body = " Hi ! " + user.getName() + "\n" +
+                "You have successfully booked an appointment on "
+                + appointment.getAppointmentDate() + "at "
+                + appointment.getAppointmetTime() + "\n" +
+                "You doctor is " + doctor.getName() + "\n" +
+                "Please reach at " + doctor.getVaccinationCenter().getAddress() + "\n"
+                + "Mask is mandatory";
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("abc@gmail.com");
+        mailMessage.setTo(user.getEmailId());
+        mailMessage.setSubject("Appointment Booked");
+        mailMessage.setText(body);
+        mailSender.send(mailMessage);
+        return body;
 
 
     }
