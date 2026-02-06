@@ -44,14 +44,14 @@ public class AppointmentService {
 
         Appointment appointment = new  Appointment();
         appointment.setAppointmentDate(appointmentReqDto.getAppointmentDate());
-        appointment.setAppointmetTime(appointmentReqDto.getAppointmentTime());
+        appointment.setAppointmentTime(appointmentReqDto.getAppointmentTime());
 
          appointment.setDoctor(doctor);
          appointment.setUser(user);
-
+        doctor.getAppointmentList().add(appointment);
+        user.getAppointmentList().add(appointment);
          appointmentRepository.save(appointment);
-         doctor.getAppointmentList().add(appointment);
-         user.getAppointmentList().add(appointment);
+
 
          doctorRepository.save(doctor);
          userRepository.save(user);
@@ -59,7 +59,7 @@ public class AppointmentService {
         String body = " Hi ! " + user.getName() + "\n" +
                 "You have successfully booked an appointment on "
                 + appointment.getAppointmentDate() + "at "
-                + appointment.getAppointmetTime() + "\n" +
+                + appointment.getAppointmentTime() + "\n" +
                 "You doctor is " + doctor.getName() + "\n" +
                 "Please reach at " + doctor.getVaccinationCenter().getAddress() + "\n"
                 + "Mask is mandatory";

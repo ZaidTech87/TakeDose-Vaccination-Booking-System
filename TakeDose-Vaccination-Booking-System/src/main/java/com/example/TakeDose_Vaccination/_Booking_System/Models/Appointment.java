@@ -15,8 +15,8 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date appointmentDate;
-    private LocalTime appointmetTime;
+    private LocalDate appointmentDate;
+    private LocalTime appointmentTime;
 
     @ManyToOne
     @JoinColumn

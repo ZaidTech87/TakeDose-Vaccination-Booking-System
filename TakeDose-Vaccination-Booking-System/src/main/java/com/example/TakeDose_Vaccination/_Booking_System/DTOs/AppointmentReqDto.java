@@ -2,6 +2,7 @@ package com.example.TakeDose_Vaccination._Booking_System.DTOs;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 public class AppointmentReqDto {
     private Integer docId;
     private Integer userId;
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
     private LocalTime appointmentTime;
 
 }
