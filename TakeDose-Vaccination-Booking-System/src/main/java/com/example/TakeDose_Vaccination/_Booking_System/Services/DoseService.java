@@ -16,11 +16,14 @@ public class DoseService {
     UserRepository userRepository;
     public String giveDose(String doseId, Integer userId) {
         User user = userRepository.findById(userId).get();
+
+
         Dose dose = new Dose();
 
         dose.setDoseId(doseId);
         dose.setUser(user);
         user.setDose(dose);
+
         userRepository.save(user);
         doseRepository.save(dose);
         return "Dose given successfully";

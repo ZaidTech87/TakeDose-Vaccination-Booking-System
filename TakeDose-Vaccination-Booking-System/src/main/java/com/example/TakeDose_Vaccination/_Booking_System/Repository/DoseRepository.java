@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DoseRepository  extends JpaRepository<Dose,Integer> {
+
+
 }
+
