@@ -17,6 +17,7 @@ public class DoseController {
     @PostMapping("/giveDose1")
     public String giveDose(@RequestParam("doseId") String doseId, @RequestParam("userId") Integer userId) {
         return doseService.giveDose(doseId,userId);
+        // i have to check through post man is there is runnig good or not
     }
 
 }
