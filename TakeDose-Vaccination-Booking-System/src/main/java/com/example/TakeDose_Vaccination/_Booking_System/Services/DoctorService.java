@@ -12,47 +12,53 @@ import com.example.TakeDose_Vaccination._Booking_System.Repository.VaccinationCe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class DoctorService {
+
     @Autowired
     private DoctorRepository doctorRepository;
+
     @Autowired
     private VaccinationCenterRepository vaccinationCenterRepository;
 
-    public String addDoctor(Doctor doctor) throws EmailIdEmptyExeption, DoctorAlreadyExistExeption {
-        if(doctor.getEmailId() == null){
-            throw new EmailIdEmptyExeption("Email id is Mandatory");
-        }
-        if(doctorRepository.findByEmailId(doctor.getEmailId()) !=null) {
-            throw new  DoctorAlreadyExistExeption("Doctor with this Email Id Already exists");
-        }
-        doctorRepository.save(doctor);
-        return "Doctor has baeen added";
+    public String addDoctor(Doctor doctor)
+            throws EmailIdEmptyExeption, DoctorAlreadyExistExeption {
 
+        if (doctor.getEmailId() == null ||
+                doctor.getEmailId().isBlank()) {
+
+            throw new EmailIdEmptyExeption("Email id is mandatory");
+        }
+
+        if (doctorRepository.existsByEmailId(doctor.getEmailId())) {
+            throw new DoctorAlreadyExistExeption(
+                    "Doctor with this Email Id already exists"
+            );
+        }
+
+        doctorRepository.save(doctor);
+
+        return "Doctor has been added successfully";
     }
 
-    public String associateDoctor(AssociateDoctorDto associateDoctorDto) throws DoctorNotFound, CenterNotFound {
-        Integer docId = associateDoctorDto.getDocId();
-        Optional<Doctor> doctorOptional = doctorRepository.findById(docId);
-        if(!doctorOptional.isPresent()){
-              throw new DoctorNotFound("doctor is wrong");
-        }
+    public String associateDoctor(
+            AssociateDoctorDto associateDoctorDto)
+            throws DoctorNotFound, CenterNotFound {
 
-        Integer centerId = associateDoctorDto.getCenterId();
-        Optional<VaccinationCenter> vaccinationCenterOptional = vaccinationCenterRepository.findById(centerId);
-        if(!vaccinationCenterOptional.isPresent()) {
-            throw new CenterNotFound("Center id incorrect entered");
-        }
-            Doctor doctor = doctorOptional.get();
-            VaccinationCenter vaccinationCenter = vaccinationCenterOptional.get();
-            doctor.setVaccinationCenter(vaccinationCenter);
+        Doctor doctor = doctorRepository
+                .findById(associateDoctorDto.getDocId())
+                .orElseThrow(() ->
+                        new DoctorNotFound("Doctor not found"));
 
-            vaccinationCenter.getDoctorList().add(doctor);
-            vaccinationCenterRepository.save(vaccinationCenter);
-            return "Doctor has been associated to center";
+        VaccinationCenter center = vaccinationCenterRepository
+                .findById(associateDoctorDto.getCenterId())
+                .orElseThrow(() ->
+                        new CenterNotFound("Vaccination center not found"));
 
+        doctor.setVaccinationCenter(center);
 
+        doctorRepository.save(doctor);
+
+        return "Doctor has been associated to center successfully";
     }
 }

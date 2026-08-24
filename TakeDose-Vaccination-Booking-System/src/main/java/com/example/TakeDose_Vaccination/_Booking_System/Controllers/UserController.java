@@ -10,28 +10,34 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
+
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping("/addUser")
-    public User addUser(@RequestBody User user){
+    public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     @GetMapping("/vaccinationDate")
-    public Date vaccinationDate(@RequestParam("userId") Integer userId){
+    public Date vaccinationDate(
+            @RequestParam("userId") Integer userId) {
+
         return userService.vaccinationDate(userId);
     }
 
     @PutMapping("/updateEmail")
-    public String updateEamil(@RequestBody UpdateEmailDto updateEmailDto ){
+    public String updateEmail(
+            @RequestBody UpdateEmailDto updateEmailDto) {
+
         return userService.updateEmail(updateEmailDto);
     }
 
-    @GetMapping("/getUserById")
-    public User findByEmailId(@RequestParam("emailId") String emailId){
+    @GetMapping("/getUserByEmail")
+    public User findByEmailId(
+            @RequestParam("emailId") String emailId) {
+
         return userService.findByEmailId(emailId);
     }
 }

@@ -10,29 +10,48 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/doctor")
-@CrossOrigin(origins = "http://localhost:5173")
 public class DoctorController {
-    @Autowired
-    DoctorService doctorService;
-    @PostMapping("/addDoctor")
-    public String addDoctor(@RequestBody Doctor doctor){
-        try{
-            String responce = doctorService.addDoctor(doctor);
-            return responce;
-        }catch (Exception e){
-            return e.getMessage();
-        }
 
+    @Autowired
+    private DoctorService doctorService;
+
+    @PostMapping("/addDoctor")
+    public ResponseEntity<String> addDoctor(
+            @RequestBody Doctor doctor) {
+
+        try {
+
+            String response =
+                    doctorService.addDoctor(doctor);
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/associateWithCenter")
-    public ResponseEntity<String> associateDoctor(@RequestBody AssociateDoctorDto associateDoctorDto){
+    public ResponseEntity<String> associateDoctor(
+            @RequestBody AssociateDoctorDto associateDoctorDto) {
 
         try {
-            String result = doctorService.associateDoctor(associateDoctorDto);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+            String result =
+                    doctorService.associateDoctor(
+                            associateDoctorDto
+                    );
+
+            return ResponseEntity.ok(result);
+
+        } catch (Exception e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 }
