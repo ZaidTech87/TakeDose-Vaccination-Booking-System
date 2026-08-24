@@ -8,8 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/doctor")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DoctorController {
 
     @Autowired
@@ -20,14 +23,10 @@ public class DoctorController {
             @RequestBody Doctor doctor) {
 
         try {
-
-            String response =
-                    doctorService.addDoctor(doctor);
-
+            String response = doctorService.addDoctor(doctor);
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
-
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
@@ -36,22 +35,36 @@ public class DoctorController {
 
     @PostMapping("/associateWithCenter")
     public ResponseEntity<String> associateDoctor(
-            @RequestBody AssociateDoctorDto associateDoctorDto) {
+            @RequestBody AssociateDoctorDto dto) {
 
         try {
-
             String result =
-                    doctorService.associateDoctor(
-                            associateDoctorDto
-                    );
+                    doctorService.associateDoctor(dto);
 
             return ResponseEntity.ok(result);
 
         } catch (Exception e) {
-
             return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
+                    .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
         }
+    }
+
+    // NEW
+    @GetMapping("/all")
+    public ResponseEntity<List<Doctor>> getAllDoctors() {
+
+        return ResponseEntity.ok(
+                doctorService.getAllDoctors()
+        );
+    }
+
+    @GetMapping("/center/{centerId}")
+    public ResponseEntity<List<Doctor>> getDoctorsByCenter(
+            @PathVariable Integer centerId) {
+
+        return ResponseEntity.ok(
+                doctorService.getDoctorsByCenter(centerId)
+        );
     }
 }

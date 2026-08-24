@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Repository
 public interface AppointmentRepository
@@ -15,5 +16,10 @@ public interface AppointmentRepository
             Integer doctorId,
             LocalDate appointmentDate,
             LocalTime appointmentTime
+    );
+
+    List<Appointment> findByDoctorDoctorIdAndAppointmentDate(
+            Integer doctorId,
+            LocalDate appointmentDate
     );
 }

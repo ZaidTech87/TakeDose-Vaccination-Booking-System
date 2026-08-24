@@ -11,6 +11,7 @@ import com.example.TakeDose_Vaccination._Booking_System.Repository.DoctorReposit
 import com.example.TakeDose_Vaccination._Booking_System.Repository.VaccinationCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class DoctorService {
@@ -60,5 +61,13 @@ public class DoctorService {
         doctorRepository.save(doctor);
 
         return "Doctor has been associated to center successfully";
+    }
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
+    }
+    public List<Doctor> getDoctorsByCenter(Integer centerId) {
+
+        return doctorRepository
+                .findByVaccinationCenterId(centerId);
     }
 }
